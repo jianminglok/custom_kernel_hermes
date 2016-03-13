@@ -58,6 +58,7 @@
 #include "mt_soc_afe_control.h"
 #include "mt_soc_codec_63xx.h"
 #include "mt_soc_pcm_common.h"
+#include <auddrv_underflow_mach.h>
 
 #include <mach/upmu_common.h>
 #include <mach/upmu_sw.h>
@@ -324,9 +325,14 @@ static int AudioDebug_Setting_Set(struct snd_kcontrol *kcontrol, struct snd_ctl_
     EnableSideGenHw(Soc_Aud_InterConnectionOutput_O03, Soc_Aud_MemIF_Direction_DIRECTION_OUTPUT, true);
     msleep(5 * 1000);
     EnableSideGenHw(Soc_Aud_InterConnectionOutput_O03, Soc_Aud_MemIF_Direction_DIRECTION_OUTPUT, false);
+    EnableSideGenHw(Soc_Aud_InterConnectionInput_I03, Soc_Aud_MemIF_Direction_DIRECTION_INPUT, true);
+    msleep(5 * 1000);
+    EnableSideGenHw(Soc_Aud_InterConnectionInput_I03, Soc_Aud_MemIF_Direction_DIRECTION_INPUT, false);
 
     Ana_Log_Print();
     Afe_Log_Print();
+
+    Auddrv_Enable_dump(true);
 
     return 0;
 }

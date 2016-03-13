@@ -106,7 +106,8 @@
 #include <sound/soc-dapm.h>
 #include <sound/pcm.h>
 #include <sound/jack.h>
-//#include <asm/mach-types.h>
+#include <auddrv_underflow_mach.h>
+
 
 #include <mach/mt_gpio.h>
 #include <mach/mt_boot.h>
@@ -131,7 +132,6 @@ static bool mPcm2AsyncFifoSel = true;
 static bool AudioSpeakerProtectUsingSram = false;
 static unsigned int MCLKFS = 128;
 static unsigned int MCLKFS_I2S3 = 256;
-
 
 static AudioDigtalI2S *AudioAdcI2S = NULL;
 static AudioDigtalI2S *m2ndI2S = NULL; // input
@@ -1947,6 +1947,7 @@ bool EnableSideToneFilter(bool stf_on)
         Afe_Set_Reg(AFE_SIDETONE_CON1, write_reg_value, MASK_ALL);
         printk("%s(), AFE_SIDETONE_CON1[0x%x] = 0x%x\n", __FUNCTION__, AFE_SIDETONE_CON1, write_reg_value);
 
+#if 0 // no need to set sidetone coeffecient. spend too much time during incall
         for (coef_addr = 0; coef_addr < kSideToneHalfTapNum; coef_addr++)
         {
             bool old_write_ready = (read_reg_value >> 29) & 0x1;
@@ -1977,6 +1978,7 @@ bool EnableSideToneFilter(bool stf_on)
                 }
             }
         }
+#endif
     }
     AudDrv_Clk_Off();
     printk("-%s(), stf_on = %d\n", __FUNCTION__, stf_on);
@@ -2244,6 +2246,7 @@ bool SetIrqMcuCounter(uint32 Irqmode, uint32 Counter)
         case Soc_Aud_IRQ_MCU_MODE_IRQ5_MCU_MODE:
         {
             printk(" %s Soc_Aud_IRQ_MCU_MODE_IRQ5_MCU_MODE  Counter = %d ", __func__,  Counter);
+            
             Afe_Set_Reg(AFE_IRQ_CNT5, Counter , 0x0003ffff);  // ox3BC [0~17] , ex 24bit , stereo, 48BCKs @CNT
 
             break;
@@ -3440,6 +3443,7 @@ void Auddrv_DL1_Interrupt_Handler(void)  // irq1 ISR handler
     if (Afe_Block->u4DataRemained < Afe_consumed_bytes || Afe_Block->u4DataRemained <= 0 || Afe_Block->u4DataRemained  > Afe_Block->u4BufferSize)
     {
         printk("DL_Handling underflow \n");
+        Auddrv_Set_UnderFlow();
     }
     else
     {

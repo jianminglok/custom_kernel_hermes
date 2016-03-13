@@ -21,3 +21,5 @@ Work rom and recovery
 9.Giro
 
 10.Battery 3000mah
+
+11.FIX Composer and Surfaceflinger (easy start rom)

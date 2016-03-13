@@ -59,6 +59,8 @@
 #include "mt_soc_afe_control.h"
 #include "mt_soc_digital_type.h"
 #include "mt_soc_pcm_common.h"
+#include <auddrv_underflow_mach.h>
+
 
 #define MAGIC_NUMBER 0xFFFFFFC0
 static DEFINE_SPINLOCK(auddrv_I2S0dl1_lock);
@@ -317,6 +319,7 @@ static snd_pcm_uframes_t mtk_pcm_I2S0dl1_pointer(struct snd_pcm_substream *subst
         spin_unlock_irqrestore(&pI2S0dl1MemControl->substream_lock, flags);
         return Frameidx;
     }
+    return 0;
 
 }
 
@@ -487,6 +490,9 @@ static int mtk_pcm_I2S0dl1_close(struct snd_pcm_substream *substream)
     mPlaybackSramState = GetSramState();
     AfeControlSramUnLock();
     AudDrv_Clk_Off();
+
+    // reset for dmump state
+    Auddrv_Reset_Dump_State();
     return 0;
 }
 

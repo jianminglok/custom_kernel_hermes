@@ -14,7 +14,6 @@
 #define MAKE_DISP_SESSION(type, dev) (unsigned int)( (type)<<16 | (dev))
 
 
-
 /* /============================================================================= */
 /* structure declarations */
 /* /=========================== */
@@ -251,6 +250,7 @@ typedef struct disp_session_info_t {
 	unsigned int isConnected;
 	unsigned int isHDCPSupported;
 	unsigned int isOVLDisabled;
+        unsigned int dummy;
 } disp_session_info;
 
 typedef struct disp_buffer_info_t {

@@ -1,25 +1,67 @@
-# Custom_kernel_hermes
+# Custom kernel for Xiaomi Hermes (Redmi Note 2)
+# Kernel version 3.10.61 LCSH and Vanzo Hybrid
+Works in rom(tested 7.0.8.0) and recovery
 
-Work rom and recovery
+* Works:
+	* LCM(nt35596 tianma)
+	* tps65132
+	* Sdcard
+	* Wi-fi
+	* Bt
+	* IOCTL (fixed hwcomposer and surfaceflinger)
+	* da9210 (charger driver)
+	* tps6128x
 
-1.LCM
+* Partitialy works:
+	* Touch(focaltech) - menu button don't work
+	* Alsps (ps bugged)
+	* Accel
+	* Mag
+	* Giro
+	* Battery 3000mah(sw battery driver)
 
-2.Touch
+* Don't work:
+	* LCM (nt35532_boe, nt35596_auo)
+	* MD1 and MD2
+	* Touch(atmel)
+	* Imgsensor(all img sensors)
+	* Lens
+	* CW2015 (hw battery driver)
+	* Other
 
-3.Fix Sdcard
+=================================================
+# BUILD
+Сonfigure shell script "build.sh" and RUN!
 
-4.Wi-fi
+# OTHER
+Dts forked from stock
 
-5.Bt
+# I2c
 
-6.Alsps
+* I2C0
+	* tps65132              (003e)
+	* kd_camera_hw          (007f)
+	* DF9761BAF             (0018) - LENS
+	* CAM_CAL_DRV           (0036)
 
-7.Accel
+* I2C1
+	* da9210                (0068)
+	* tps6128x              (0075)
 
-8.Mag
+* I2C2
+	* atmel                 (004a)
+	* kd_camera_hw_bus 2    (007f)
+	* FT			(0038)
 
-9.Giro
+* I2C3
+	* akm0991               (000c)
+	* yas537                (002e)
+	* LSM6DS3_ACCEL         (006a)
+	* LTR_559ALS		(0023)
+	* LSM6DS3_GYRO		(0034)
+	* stk3x1x               (0048)
+	* bmi160_gyro		(0066)
+	* bmi160_acc		(0068)
 
-10.Battery 3000mah
-
-11.FIX Composer and Surfaceflinger (easy start rom)
+* I2C4
+	* CW2015 		(0062)

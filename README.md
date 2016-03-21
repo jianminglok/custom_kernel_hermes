@@ -7,13 +7,15 @@ Works in rom(tested 7.0.8.0) and recovery
 	* tps65132
 	* Sdcard
 	* Wi-fi
-	* Bt
 	* IOCTL (fixed hwcomposer and surfaceflinger)
 	* da9210 (charger driver)
-	* tps6128x
+	* Bt
+        * Button-backlight
+        * Brightness
+        * Leds indication only (red,green,blu)
 
 * Partitialy works:
-	* Touch(focaltech) - menu button don't work
+	* Touch(focaltech)
 	* Alsps (ps bugged)
 	* Accel
 	* Mag
@@ -21,6 +23,7 @@ Works in rom(tested 7.0.8.0) and recovery
 	* Battery 3000mah(sw battery driver)
 
 * Don't work:
+	* tps6128x (mt-i2c: transfer error)
 	* LCM (nt35532_boe, nt35596_auo)
 	* MD1 and MD2
 	* Touch(atmel)

@@ -10,9 +10,10 @@ Works in rom(tested 7.0.8.0) and recovery
 	* IOCTL (fixed hwcomposer and surfaceflinger)
 	* da9210 (charger driver)
 	* Bt
-        * Button-backlight
-        * Brightness
-        * Leds indication only (red,green,blu)
+	* Button-backlight
+	* Brightness
+	* Leds indication only (red,green,blu)
+	* MD1 and MD2(sim1 and sim2)
 
 * Partitialy works:
 	* Touch(focaltech)
@@ -25,7 +26,6 @@ Works in rom(tested 7.0.8.0) and recovery
 * Don't work:
 	* tps6128x (mt-i2c: transfer error)
 	* LCM (nt35532_boe, nt35596_auo)
-	* MD1 and MD2
 	* Touch(atmel)
 	* Imgsensor(all img sensors)
 	* Lens
